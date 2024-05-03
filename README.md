@@ -33,4 +33,32 @@ To run the program and observe its behavior:
 When we type text in each client, the text is sent to the server, which then broadcasts it to all connected clients. Each client receives the broadcasted message, including the message it sent, resulting in a chat-like interaction between all clients.
 </details>
 
+<details>
+<summary>2.2. Modifying the websocket port</summary>
+
+To modify the port to be 8080, we need to change the port number where the server binds and where the client connects. Here's what we need to modify:
+
+### `src/bin/server.rs`:
+Change the port number in the `TcpListener::bind` function call:
+
+```
+let listener = TcpListener::bind("127.0.0.1:8080").await?;
+```
+
+### `src/bin/client.rs`:
+Change the URI to connect to the server on port 8080:
+
+```
+let (mut ws_stream, _) =
+    ClientBuilder::from_uri(Uri::from_static("ws://127.0.0.1:8080"))
+        .connect()
+        .await?;
+```
+
+### WebSocket Protocol:
+Both the server and client are using the WebSocket protocol, which is defined and implemented in the `tokio_websockets` crate. This crate provides the necessary abstractions and utilities for working with WebSocket connections in Tokio-based applications. The WebSocket protocol allows bidirectional communication between clients and servers over a single, long-lived connection.
+
+After making these modifications, we should be able to run the server and clients on port 8080 successfully, maintaining the functionality of the chat application.
+</details>
+
 </details>
