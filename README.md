@@ -61,4 +61,26 @@ Both the server and client are using the WebSocket protocol, which is defined an
 After making these modifications, we should be able to run the server and clients on port 8080 successfully, maintaining the functionality of the chat application.
 </details>
 
+<details>
+<summary>2.3. Small changes. Add some information to client</summary>
+
+![2.3. Small changes. Add some information to client 1](https://i.ibb.co/xGxDgR9/Cuplikan-layar-2024-05-03-101655.png)
+![2.3. Small changes. Add some information to client 2](https://i.ibb.co/7Kvrx1Q/Cuplikan-layar-2024-05-03-101703.png)
+![2.3. Small changes. Add some information to client 3](https://i.ibb.co/yYNQbsR/Cuplikan-layar-2024-05-03-101712.png)
+
+In the original implementation, the server was simply broadcasting the message received from a client without any additional information about the sender. Similarly, the client was receiving messages from the server without any details about who sent the message.
+
+To add information about the sender to each client, we need to modify both the server and the client:
+
+1. **Server Modification**:
+    - In the server code, when handling a message from a client, we need to prepend information about the sender (in this case, the client's IP address and port) to the message before broadcasting it to all clients.
+    - This modification ensures that each client receives messages along with details about who sent the message.
+
+2. **Client Modification**:
+    - In the client code, we need to extract and display the sender information along with the message content.
+    - This modification allows each client to show messages along with details about the sender, providing context about the origin of each message.
+
+By making these changes in both the server and client code, we ensure that information about the sender is included and displayed correctly in the chat application. It's essential to modify both sides of the communication to maintain consistency and ensure that each client receives and displays messages with sender information accurately.
+</details>
+
 </details>
